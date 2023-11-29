@@ -1,7 +1,25 @@
-const { User } = require('./User')
-// import the rest of your models above
+// const { hasOne, belongsTo, hasMany } = require('sequelize')
+const User = require('./User');
+const Deck = require('./Deck');
+const Card = require('./Card');
+const Attack = require('./Attack');
 
-//set up the associations here
+User.hasOne(Deck);
+Deck.belongsTo(User);
+
+Card.belongsTo(Deck);
+Deck.hasMany(Card);
+
+Card.belongsToMany(Attack, { through : 'cardAttacks'});
+Attack.belongsToMany(Card, { through : 'cardAttacks'});
+// User to Deck 1-to-1
+// Deck to Card 1-to-many
+// Card to Attack many-to-many
 
 // and then export them all below
-module.exports = { User }
+module.exports = { 
+    User,
+    Deck,
+    Card,
+    Attack
+};

@@ -19,7 +19,6 @@ afterAll(async () => await db.sync({ force: true }))
 
 describe('User', () => {
   it('has an id', async () => {
-    console.log(user, 'TJETEQFJGWEGWJEGWEGJGWEJ')
     expect(user).toHaveProperty('id')
   })
 
@@ -27,8 +26,8 @@ describe('User', () => {
     expect(user).toHaveProperty('username', 'gandalf')
   })
 
-  // it('has a one-to-one relationship with Deck', async () => {
-  //   const associatedDeck = await user.getDeck();
-  //   expect(associatedDeck).toEqual(deck);
-  // });
+  it('has a one-to-one relationship with Deck', async () => {
+    const associatedDeck = await user.getDeck();
+    expect(associatedDeck.dataValues.name).toEqual('test');
+  });
 })
